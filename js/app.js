@@ -74,7 +74,9 @@ const botonLimpiar = document.getElementById('limpiar-carrito')
 botonLimpiar.addEventListener('click', () => {
     carrito.length = 0
     actualizarCarrito()
+    contadorCarrito.innerText = 0
 })
+
 
 const actualizarCarrito = () => {
     //reseteo carrito
@@ -96,7 +98,7 @@ const actualizarCarrito = () => {
 
     })
 
-    //contar y mostrar numero de productos en carrito
+    //contar productos en carrito
 
     function calcularContador() {
         let contador = 0
