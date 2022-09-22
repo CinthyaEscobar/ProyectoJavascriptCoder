@@ -9,8 +9,16 @@ let productos = [{ id: 1, nombre: 'Delineador', marca: 'Maybelline', precio: 300
 
 
 
-
 let carrito = []
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito()
+    }
+})
+
 const contadorCarrito = document.getElementById('contadorCarrito')
 const contenedorCarrito = document.getElementById('lista-carrito')
 
@@ -31,12 +39,13 @@ const mostrarProductos = () => {
     productos.forEach((producto, indice) => {
         let card = document.createElement("div")
         card.classList.add("card", "col-sm-12", "col-lg-3")
-        card.innerHTML = ` <img src = ${producto.imagen} alt=''>
+        card.innerHTML = `<img src = ${producto.imagen}  class=" card-img" alt=''>
         <div class="card-body">
         <h5 class = "card-title"> ${producto.nombre}</h5>
         <p class="card-text">$${producto.precio}</p>
         <p class="card-text">${producto.marca}</p>
         <button id="agregar ${producto.id}" class= "btn btn-info boton-agregar"> Agregar al carrito</button>
+        <br>
         </div>`
         contenedorProductos.appendChild(card)
         const boton = document.getElementById(`agregar ${producto.id}`)
@@ -46,7 +55,14 @@ const mostrarProductos = () => {
         })
         //llamo funcion 
         boton.addEventListener('click', () => {
-            alert(`Has agregado: ${calcularAgregados()} `)
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: (`Has agregado: ${calcularAgregados()} `),
+                showConfirmButton: false,
+                timer: 2000
+            })
         })
     })
 }
@@ -66,6 +82,7 @@ const agregarCarrito = (productoId) => {
         const item = productos.find((producto) => producto.id === productoId)
         carrito.push(item)
     }
+
     actualizarCarrito()
 }
 
@@ -75,8 +92,21 @@ botonLimpiar.addEventListener('click', () => {
     carrito.length = 0
     actualizarCarrito()
     contadorCarrito.innerText = 0
+    localStorage.clear()
 })
 
+//eliminar productos
+const eliminarDelCarrito = (productoId) => {
+    const item = carrito.find((producto) => producto.id === productoId)
+    const indice = carrito.indexOf(item)
+    carrito.splice(indice, 1)
+    actualizarCarrito()
+     localStorage[0] = 1 ? localStorage.removeItem("carrito") : "";
+     // cambiar contador cuando carrito llegue a 0
+     if(carrito.length == 0){
+        contadorCarrito.innerHTML=0
+     }
+}
 
 const actualizarCarrito = () => {
     //reseteo carrito
@@ -91,21 +121,24 @@ const actualizarCarrito = () => {
         <td> Precio unitario: $${producto.precio}</td>
         <td>Cantidad:${producto.stock}</td>
         <td> Subtotal: $${producto.precio * producto.stock}</td>
+        <button onclick="eliminarDelCarrito(${producto.id})" id="borrarProducto" class="boton-eliminar btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
         `
         contadorCarrito.innerText = `${calcularContador()}  `
         contenedorCarrito.appendChild(row)
-
-
+        localStorage.setItem('carrito', JSON.stringify(carrito))
     })
 
-    //contar productos en carrito
 
+  
+    //contar productos en carrito
     function calcularContador() {
         let contador = 0
         carrito.forEach((producto) => {
             contador += producto.stock
+            
         })
         return contador
+        
     }
 
     //calculo total 
@@ -113,7 +146,7 @@ const actualizarCarrito = () => {
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.stock * producto.precio, 0)
 }
 
-//form
+//FORMULARIO
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('form').addEventListener('submit', formControl)
 })
@@ -127,11 +160,29 @@ function formControl(event) {
 
     formData = new FormData(formulario)
 
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: (`Gracias por registrarte ${formData.get('nombre')} !`),
-        showConfirmButton: false,
-        timer: 2000
-    })
+    function validateForm() {
+        let input1 = document.forms["form"]["nombre"].value;
+        let input2 = document.forms["form"]["email"].value;
+
+        if (input1.trim() == "" || input2.trim() == "") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: ('Debes ingresar tu nombre y tu email !'),
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return false;
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: (`Gracias por registrarte ${formData.get('nombre')} !`),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    }
+    validateForm()
+
 }

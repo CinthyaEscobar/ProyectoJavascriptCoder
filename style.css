@@ -6,6 +6,7 @@ background: linear-gradient(to right, #fffcdc, #d9a7c7); /* W3C, IE 10+/ Edge, F
 }  
 
 
+
 .nav-item{
   display: grid;
   text-align: center;
@@ -80,3 +81,43 @@ footer {
       text-decoration: none; }
       footer a:hover {
         color: #80003c; }
+
+        
+     
+    
+      
+      ul.dropdown-cart li .item-left{
+          float:left;
+      }
+      ul.dropdown-cart li .item-left img,
+      ul.dropdown-cart li .item-left span.item-info{
+          float:left;
+      }
+      ul.dropdown-cart li .item-left span.item-info{
+          margin-left:10px;   
+      }
+      ul.dropdown-cart li .item-left span.item-info span{
+          display:block;
+      }
+      ul.dropdown-cart li .item-right{
+          float:right;
+      }
+      ul.dropdown-cart li .item-right button{
+          margin-top:14px;
+      }
+
+      .navbar { 
+        min-height: 50px; 
+        overflow:hidden;
+      }
+
+      
+.boton-eliminar{
+  color: red;
+  background-color: red;
+}
+
+h5{
+  text-decoration: underline pink;  
+  text-decoration-line: discrete
+}
