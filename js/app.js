@@ -8,10 +8,7 @@ let productos = [{ id: 1, nombre: 'Delineador', marca: 'Maybelline', precio: 300
 { id: 8, nombre: 'Set labiales', marca: 'Beauty Creations', precio: 13000, imagen: "./imagenes/labiales.jpg", stock: 1 }]
 
 
-
 let carrito = []
-
-
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('carrito')) {
         carrito = JSON.parse(localStorage.getItem('carrito'))
@@ -30,7 +27,6 @@ function calcularAgregados() {
         agregado = producto.nombre + ' $' + producto.precio
     })
     return agregado
-
 }
 
 //dibujar productos
@@ -55,7 +51,6 @@ const mostrarProductos = () => {
         })
         //llamo funcion 
         boton.addEventListener('click', () => {
-
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -93,6 +88,13 @@ botonLimpiar.addEventListener('click', () => {
     actualizarCarrito()
     contadorCarrito.innerText = 0
     localStorage.clear()
+    carrito.length === 0 && Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: (`Has vaciado tu carrito `),
+        showConfirmButton: false,
+        timer: 2000
+    })
 })
 
 //eliminar productos
@@ -100,12 +102,13 @@ const eliminarDelCarrito = (productoId) => {
     const item = carrito.find((producto) => producto.id === productoId)
     const indice = carrito.indexOf(item)
     carrito.splice(indice, 1)
+    localStorage.removeItem("carrito");
+    // cambiar contador cuando carrito llegue a 0
+    if (carrito.length === 0) {
+        contadorCarrito.innerHTML = 0
+    }
     actualizarCarrito()
-     localStorage[0] = 1 ? localStorage.removeItem("carrito") : "";
-     // cambiar contador cuando carrito llegue a 0
-     if(carrito.length == 0){
-        contadorCarrito.innerHTML=0
-     }
+
 }
 
 const actualizarCarrito = () => {
@@ -129,16 +132,14 @@ const actualizarCarrito = () => {
     })
 
 
-  
+
     //contar productos en carrito
     function calcularContador() {
         let contador = 0
         carrito.forEach((producto) => {
             contador += producto.stock
-            
         })
         return contador
-        
     }
 
     //calculo total 
@@ -164,16 +165,31 @@ function formControl(event) {
         let input1 = document.forms["form"]["nombre"].value;
         let input2 = document.forms["form"]["email"].value;
 
-        if (input1.trim() == "" || input2.trim() == "") {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: ('Debes ingresar tu nombre y tu email !'),
-                showConfirmButton: false,
-                timer: 1500
-            })
-            return false;
-        } else {
+        /*    if (input1.trim() == "" || input2.trim() == "") {
+               Swal.fire({
+                   position: 'top-end',
+                   icon: 'error',
+                   title: ('Debes ingresar tu nombre y tu email !'),
+                   showConfirmButton: false,
+                   timer: 1500
+               })
+               return false;
+           } else {
+               Swal.fire({
+                   position: 'top-end',
+                   icon: 'success',
+                   title: (`Gracias por registrarte ${formData.get('nombre')} !`),
+                   showConfirmButton: false,
+                   timer: 2000
+               })
+           } */
+        input1.trim() == "" || input2.trim() == "" ? Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: ('Debes ingresar tu nombre y tu email !'),
+            showConfirmButton: false,
+            timer: 1500
+        }) :
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -181,7 +197,6 @@ function formControl(event) {
                 showConfirmButton: false,
                 timer: 2000
             })
-        }
     }
     validateForm()
 
