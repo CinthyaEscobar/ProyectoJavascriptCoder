@@ -18,13 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const contadorCarrito = document.getElementById('contadorCarrito')
 const contenedorCarrito = document.getElementById('lista-carrito')
+const botonLimpiar = document.getElementById('limpiar-carrito')
+
 
 
 //funcion para mostrar mensaje de producto agregado
 function calcularAgregados() {
     let agregado = ""
     carrito.forEach((producto) => {
-        agregado = producto.nombre + ' $' + producto.precio
+        agregado = producto.nombre + ' \n Precio: $' + producto.precio
     })
     return agregado
 }
@@ -51,13 +53,16 @@ const mostrarProductos = () => {
         })
         //llamo funcion 
         boton.addEventListener('click', () => {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: (`Has agregado: ${calcularAgregados()} `),
-                showConfirmButton: false,
-                timer: 2000
-            })
+            Toastify({
+
+                text: (`Has agregado al carrito: ${calcularAgregados()} `),
+
+                duration: 3000,
+                style: {
+                    background: "linear-gradient(to right , #ff89b4, #ff3d83    )",
+                  }
+
+            }).showToast();
         })
     })
 }
@@ -77,27 +82,67 @@ const agregarCarrito = (productoId) => {
         const item = productos.find((producto) => producto.id === productoId)
         carrito.push(item)
     }
-
     actualizarCarrito()
 }
 
 //limpiar contenido
-const botonLimpiar = document.getElementById('limpiar-carrito')
 botonLimpiar.addEventListener('click', () => {
-    carrito.length = 0
-    actualizarCarrito()
-    contadorCarrito.innerText = 0
-    localStorage.clear()
-    carrito.length === 0 && Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: (`Has vaciado tu carrito `),
-        showConfirmButton: false,
-        timer: 2000
-    })
-})
+    vaciarCarrito()
 
+})
+function vaciarCarrito() {
+    carrito.length >= 1 ? 
+        Swal.fire({
+            title: "¿Quiere vaciar su carrito?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f15c8e",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Confirmar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                carrito.length = 0
+                actualizarCarrito()
+                contadorCarrito.innerText = 0
+                localStorage.clear()
+                carrito.length === 0 && Toastify({
+
+                    text: ('Has vaciado tu carrito'),
+                    duration: 3000,
+                    style: {
+                        background: "linear-gradient(to right, #ff89b4  , #ff89b4  )",
+                      }
+                }).showToast();
+            }
+        }):
+        Toastify({
+
+            text: ('No tienes productos en el carrito'),
+            duration: 3000,
+           
+        }).showToast();
+        
+
+    
+}
 //eliminar productos
+function eliminarProducto(productoId) {
+    const item = carrito.find((producto) => producto.id === productoId)
+    Swal.fire({
+        title: `¿Quiere eliminar el producto ${item.nombre} del carrito?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#f15c8e",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Confirmar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            eliminarDelCarrito(productoId)
+        }
+    });
+}
 const eliminarDelCarrito = (productoId) => {
     const item = carrito.find((producto) => producto.id === productoId)
     const indice = carrito.indexOf(item)
@@ -107,6 +152,10 @@ const eliminarDelCarrito = (productoId) => {
     if (carrito.length === 0) {
         contadorCarrito.innerHTML = 0
     }
+    Toastify({
+        text: (`Producto: ${item.nombre} eliminado del carrito`),
+        duration: 3000,
+    }).showToast();
     actualizarCarrito()
 
 }
@@ -124,14 +173,12 @@ const actualizarCarrito = () => {
         <td> Precio unitario: $${producto.precio}</td>
         <td>Cantidad:${producto.stock}</td>
         <td> Subtotal: $${producto.precio * producto.stock}</td>
-        <button onclick="eliminarDelCarrito(${producto.id})" id="borrarProducto" class="boton-eliminar btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+        <button onclick="eliminarProducto(${producto.id})" id="borrarProducto" class="boton-eliminar btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
         `
         contadorCarrito.innerText = `${calcularContador()}  `
         contenedorCarrito.appendChild(row)
         localStorage.setItem('carrito', JSON.stringify(carrito))
     })
-
-
 
     //contar productos en carrito
     function calcularContador() {
@@ -165,24 +212,6 @@ function formControl(event) {
         let input1 = document.forms["form"]["nombre"].value;
         let input2 = document.forms["form"]["email"].value;
 
-        /*    if (input1.trim() == "" || input2.trim() == "") {
-               Swal.fire({
-                   position: 'top-end',
-                   icon: 'error',
-                   title: ('Debes ingresar tu nombre y tu email !'),
-                   showConfirmButton: false,
-                   timer: 1500
-               })
-               return false;
-           } else {
-               Swal.fire({
-                   position: 'top-end',
-                   icon: 'success',
-                   title: (`Gracias por registrarte ${formData.get('nombre')} !`),
-                   showConfirmButton: false,
-                   timer: 2000
-               })
-           } */
         input1.trim() == "" || input2.trim() == "" ? Swal.fire({
             position: 'top-end',
             icon: 'error',
