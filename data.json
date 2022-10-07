@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "nombre": "Delineador",
+        "marca": "Maybelline",
+        "precio": 3000,
+        "imagen": "./imagenes/delinea.jpg",
+        "stock": 1
+    },
+    {
+        "id": 2,
+        "nombre": "Base de maquillaje",
+        "marca": "Loreal",
+        "precio": 6000,
+        "imagen": "./imagenes/base.jpg",
+        "stock": 1
+    },
+    {
+        "id": 3,
+        "nombre": "Paleta de sombras",
+        "marca": "NYX",
+        "precio": 10500,
+        "imagen": "./imagenes/paleta.jpg",
+        "stock": 1
+    },
+    {
+        "id": 4,
+        "nombre": "Serum Acido Hialuronico",
+        "marca": "Loreal",
+        "precio": 12000,
+        "imagen": "./imagenes/serum.jpg",
+        "stock": 1
+    },
+    {
+        "id": 5,
+        "nombre": "Crema Hidratante",
+        "marca": "Neutrogena",
+        "precio": 15000,
+        "imagen": "./imagenes/neutrogena.jpg",
+        "stock": 1
+    },
+    {
+        "id": 6,
+        "nombre": "Set rubores",
+        "marca": "MAC",
+        "precio": 8000,
+        "imagen": "./imagenes/rubor.jpg",
+        "stock": 1
+    },
+    {
+        "id": 7,
+        "nombre": "Máscara de pestañas",
+        "marca": "Maybelline",
+        "precio": 9000,
+        "imagen": "./imagenes/mascara.jpg",
+        "stock": 1
+    },
+    {
+        "id": 8,
+        "nombre": "Set labiales",
+        "marca": "Beauty Creations",
+        "precio": 13000,
+        "imagen": "./imagenes/labiales.jpg",
+        "stock": 1
+    }
+]

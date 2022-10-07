@@ -121,3 +121,8 @@ h5{
   text-decoration: underline pink;  
   text-decoration-line: discrete
 }
+.swal2-popup {
+  font-size: 1.3rem !important;
+  font-family: 'Potta One', cursive;
+  color: rgb(205, 106, 238)
+}
