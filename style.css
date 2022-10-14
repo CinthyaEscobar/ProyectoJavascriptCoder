@@ -1,126 +1,143 @@
-body{
-  background: #d9a7c7;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #fffcdc, #d9a7c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}  
-
+body {
+  background: #d9a7c7;
+  background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7);
+  background: linear-gradient(to right, #fffcdc, #d9a7c7);
+}
 
 
-.nav-item{
+
+.nav-item {
   display: grid;
   text-align: center;
 }
-.titulo{
-    display: grid;
-    text-align: center;
-    font-family: 'Potta One', cursive;
-    color: rgb(205, 106, 238)
-    ;
+
+.titulo {
+  display: grid;
+  text-align: center;
+  font-family: 'Potta One', cursive;
+  color: rgb(205, 106, 238);
 
 }
 
-.precioProducto{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Potta One', cursive;
-    color: rgb(205, 106, 238)
+.precioProducto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Potta One', cursive;
+  color: rgb(205, 106, 238)
 }
 
 
 table {
-	border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
+  border-collapse: collapse;
+  font-family: Tahoma, Geneva, sans-serif;
 }
+
 table td {
-	padding: 15px;
+  padding: 15px;
 }
+
 table thead td {
-	background-color: #a2069f;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	border: 1px solid #54585d;
+  background-color: #a2069f;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid #54585d;
 }
+
 table tbody td {
-	color: #636363;
-	border: 1px solid #dddfe1;
+  color: #636363;
+  border: 1px solid #dddfe1;
 }
+
 table tbody tr {
-	background-color: #f9fafb;
+  background-color: #f9fafb;
 }
+
 table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 
 
-.contenedor{
-    display: flex;
+.contenedor {
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.subtitulo{
-    display: grid;
-    text-align: center;
+.subtitulo {
+  display: grid;
+  text-align: center;
 }
 
 
 footer {
-    margin-top: auto; }
-    footer li {
-      font-size: 1.4rem;
-      display: block;
-      padding: .5rem 1rem;
-      text-decoration: none;
-      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out; }
-    footer a {
-      color: #f15c8e;
-      text-decoration: none; }
-      footer a:hover {
-        color: #80003c; }
+  margin-top: auto;
+}
 
-        
-     
-    
-      
-      ul.dropdown-cart li .item-left{
-          float:left;
-      }
-      ul.dropdown-cart li .item-left img,
-      ul.dropdown-cart li .item-left span.item-info{
-          float:left;
-      }
-      ul.dropdown-cart li .item-left span.item-info{
-          margin-left:10px;   
-      }
-      ul.dropdown-cart li .item-left span.item-info span{
-          display:block;
-      }
-      ul.dropdown-cart li .item-right{
-          float:right;
-      }
-      ul.dropdown-cart li .item-right button{
-          margin-top:14px;
-      }
+footer li {
+  font-size: 1.4rem;
+  display: block;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
 
-      .navbar { 
-        min-height: 50px; 
-        overflow:hidden;
-      }
+footer a {
+  color: #f15c8e;
+  text-decoration: none;
+}
 
-      
-.boton-eliminar{
+footer a:hover {
+  color: #80003c;
+}
+
+
+
+
+
+ul.dropdown-cart li .item-left {
+  float: left;
+}
+
+ul.dropdown-cart li .item-left img,
+ul.dropdown-cart li .item-left span.item-info {
+  float: left;
+}
+
+ul.dropdown-cart li .item-left span.item-info {
+  margin-left: 10px;
+}
+
+ul.dropdown-cart li .item-left span.item-info span {
+  display: block;
+}
+
+ul.dropdown-cart li .item-right {
+  float: right;
+}
+
+ul.dropdown-cart li .item-right button {
+  margin-top: 14px;
+}
+
+.navbar {
+  min-height: 50px;
+  overflow: hidden;
+}
+
+
+.boton-eliminar {
   color: red;
   background-color: red;
 }
 
-h5{
-  text-decoration: underline pink;  
+h5 {
+  text-decoration: underline pink;
   text-decoration-line: discrete
 }
+
 .swal2-popup {
   font-size: 1.3rem !important;
   font-family: 'Potta One', cursive;

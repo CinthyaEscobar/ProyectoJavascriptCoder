@@ -5,8 +5,6 @@ const botonLimpiar = document.getElementById('limpiar-carrito')
 const botonComprar = document.getElementById('pagar-carrito')
 
 let carrito = []
-//lidiar con el carrito cuando es null, o no lo que esperas en tu app. (otro carrito(?))
-
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('carrito')) {
         carrito = JSON.parse(localStorage.getItem('carrito'))
@@ -43,9 +41,6 @@ const agregarCarrito = (productoId) => {
         )
 }
 
-
-//fetch
-
 //MOSTRAR PRODUCTOS
 const productos = document.querySelector("#contenedor-productos")
 fetch("./data.json")
@@ -78,7 +73,6 @@ fetch("./data.json")
             })
         })
     })
-
 
 
 //limpiar contenido carrito
@@ -135,7 +129,7 @@ function comprarProducto() {
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Confirmar",
-          
+
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
@@ -145,19 +139,17 @@ function comprarProducto() {
                     showCancelButton: true,
                     cancelButtonText: "Cancelar",
                     cancelButtonColor: "#d33",
-                    input: 'radio',                       
+                    input: 'radio',
                     inputOptions: {
                         '#ff0000': 'Tarjeta débito/crédito',
                         '#00ff00': 'Pago en efectivo',
-                        
 
                     },
-                    
-                    inputValidator: function(result) {
+                    inputValidator: function (result) {
                         if (!result) {
-                          return 'Seleccione una forma de pago';
+                            return 'Seleccione una forma de pago';
                         }
-                      }
+                    }
                 }).then(function (result) {
                     if (result.isConfirmed) {
                         carrito.length = 0
@@ -291,5 +283,4 @@ function formControl(event) {
         }
     }
     validateForm()
-
 }
